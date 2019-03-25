@@ -16,8 +16,9 @@ COPY package*.json ./
 USER root
 
 RUN npm install
-RUN npm i -g sequelize-auto
-RUN sequelize-auto -o "./models" -d database -h localhost -u user -p 3306 -x user -e mysql
+#RUN npm i -g mysql
+#RUN npm i -g sequelize-auto
+#RUN sequelize-auto -o "./models" -d waist -h localhost -u root -p 3307 -e mariadb
 
 
 COPY --chown=node:node . .
