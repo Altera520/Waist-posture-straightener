@@ -7,14 +7,10 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
-    height: {
-      type: DataTypes.INTEGER(11),
+    name: {
+      type: DataTypes.STRING(20),
       allowNull: false
     },
-    weight: {
-      type: DataTypes.INTEGER(11),
-      allowNull: false
-    }
   }, {
     tableName: 'user'
   });

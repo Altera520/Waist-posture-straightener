@@ -1,7 +1,12 @@
 /* jshint indent: 2 */
 
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('dataset', {
+  var pos = sequelize.define('pos', {
+    pos: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      primaryKey: true
+    },
     seq: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
@@ -10,13 +15,13 @@ module.exports = function(sequelize, DataTypes) {
         model: 'user',
         key: 'seq'
       }
-    },
-    created_at: {
-      type: DataTypes.DATEONLY,
-      allowNull: false,
-      primaryKey: true
     }
   }, {
-    tableName: 'dataset'
+    tableName: 'pos'
   });
+
+  center.belongsTo(models.user, {
+    as: 'seq',
+    foreignKey: 'seq'
+  })
 };

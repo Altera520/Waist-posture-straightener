@@ -6,8 +6,7 @@
 
 var app = require('../app');
 var debug = require('debug')('dcu-project:server');
-var http = require('http');
-var serialService = require('../services/serial-service');
+var http = require('http')
 
 /**
  * Get port from environment and store in Express.
@@ -88,6 +87,4 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
-
-  serialService.start();
 }

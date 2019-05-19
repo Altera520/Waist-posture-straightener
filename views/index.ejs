@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script>
+    function start() {
+      console.log('start');
+      var dataset = {
+        name: $("#name").val(),
+        pos:$("#pos").val()
+      }
+      console.log(dataset)
+      $.ajax({
+        url: '/start',
+        type: 'post',
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
+          $('#output').html = "data receive start"
+        }
+      })
+    }
+
+    function end() {
+      $.ajax({
+        url: '/end',
+        type: 'post',
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
+          $('#output').html = "success"
+        }
+      })
+    }
+  </script>
+</head>
+
+<body>
+  <form id="submit" name="submit">
+    <input type="text" placeholder="이름 입력" id="name">
+    <select id="pos">
+      <option value="1" selected>정자세</option>
+      <option value="2">좌편향</option>
+      <option value="3">우편향</option>
+      <option value="4">후편향</option>
+      <option value="5">좌로 다리꼰자세</option>
+      <option value="6">우로 다리꼰자세</option>
+      <option value="7">전방 편향</option>
+    </select>
+  </form>
+  <button id="start" onclick="start()">시작</button>
+  <button id="end" onclick="end()">중지</button>
+  <div id="output"></div>
+</body>
+
+</html>

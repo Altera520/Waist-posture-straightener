@@ -1,22 +1,3 @@
-
-
-/*IF (SELECT EXISTS (
-  SELECT 1 
-  FROM Information_schema.tables 
-  WHERE table_name = 'user' 
-  AND table_schema = 'waist' 
-) AS flag = 1){
-	DROP TABLE left_1;
-	DROP TABLE left_2;
-	DROP TABLE left_3;
-	DROP TABLE right_1;
-	DROP TABLE right_2;
-	DROP TABLE right_3;
-	DROP TABLE center;
-	DROP TABLE dataset;
-	DROP TABLE user;
-}*/
-
 CREATE TABLE center
 (
 	field_1              INTEGER NULL,
@@ -28,136 +9,59 @@ CREATE TABLE center
 	field_7              INTEGER NULL,
 	field_8              INTEGER NULL,
 	field_9              INTEGER NULL,
-	seq                  INTEGER NOT NULL,
-	created_at           DATE NOT NULL
+	field_10             INTEGER NULL,
+	field_11             INTEGER NULL,
+	field_12             INTEGER NULL,
+	field_13             INTEGER NULL,
+	field_14             INTEGER NULL,
+	field_15             INTEGER NULL,
+	field_16             INTEGER NULL,
+	field_17             INTEGER NULL,
+	field_18             INTEGER NULL,
+	field_19             INTEGER NULL,
+	field_20             INTEGER NULL,
+	field_21             INTEGER NULL,
+	field_22             INTEGER NULL,
+	field_23             INTEGER NULL,
+	field_24             INTEGER NULL,
+	field_25             INTEGER NULL,
+	field_26             INTEGER NULL,
+	field_27             INTEGER NULL,
+	field_28             INTEGER NULL,
+	field_29             INTEGER NULL,
+	field_30             INTEGER NULL,
+	field_31             INTEGER NULL,
+	created              DATE NOT NULL,
+	pos                  INTEGER NOT NULL,
+	seq                  INTEGER NOT NULL
 );
 
 
 
 ALTER TABLE center
-ADD PRIMARY KEY (seq,created_at);
+ADD PRIMARY KEY (created,pos,seq);
 
 
 
-CREATE TABLE dataset
+CREATE TABLE pos
 (
-	seq                  INTEGER NOT NULL,
-	created_at           DATE NOT NULL
+	pos                  INTEGER NOT NULL,
+	seq                  INTEGER NOT NULL
 );
 
 
 
-ALTER TABLE dataset
-ADD PRIMARY KEY (seq,created_at);
-
-
-
-CREATE TABLE left_1
-(
-	field_1              INTEGER NULL,
-	field_2              INTEGER NULL,
-	seq                  INTEGER NOT NULL,
-	created_at           DATE NOT NULL
-);
-
-
-
-ALTER TABLE left_1
-ADD PRIMARY KEY (seq,created_at);
-
-
-
-CREATE TABLE left_2
-(
-	field_1              INTEGER NULL,
-	field_2              INTEGER NULL,
-	field_3              INTEGER NULL,
-	field_4              INTEGER NULL,
-	field_5              INTEGER NULL,
-	seq                  INTEGER NOT NULL,
-	created_at           DATE NOT NULL
-);
-
-
-
-ALTER TABLE left_2
-ADD PRIMARY KEY (seq,created_at);
-
-
-
-CREATE TABLE left_3
-(
-	field_1              INTEGER NULL,
-	field_2              INTEGER NULL,
-	field_3              INTEGER NULL,
-	field_4              INTEGER NULL,
-	seq                  INTEGER NOT NULL,
-	created_at           DATE NOT NULL
-);
-
-
-
-ALTER TABLE left_3
-ADD PRIMARY KEY (seq,created_at);
-
-
-
-CREATE TABLE right_1
-(
-	field_1              INTEGER NULL,
-	field_2              INTEGER NULL,
-	seq                  INTEGER NOT NULL,
-	created_at           DATE NOT NULL
-);
-
-
-
-ALTER TABLE right_1
-ADD PRIMARY KEY (seq,created_at);
-
-
-
-CREATE TABLE right_2
-(
-	field_1              INTEGER NULL,
-	field_2              INTEGER NULL,
-	field_3              INTEGER NULL,
-	field_4              INTEGER NULL,
-	field_5              INTEGER NULL,
-	seq                  INTEGER NOT NULL,
-	created_at           DATE NOT NULL
-);
-
-
-
-ALTER TABLE right_2
-ADD PRIMARY KEY (seq,created_at);
-
-
-
-CREATE TABLE right_3
-(
-	field_1              INTEGER NULL,
-	field_2              INTEGER NULL,
-	field_3              INTEGER NULL,
-	field_4              INTEGER NULL,
-	seq                  INTEGER NOT NULL,
-	created_at           DATE NOT NULL
-);
-
-
-
-ALTER TABLE right_3
-ADD PRIMARY KEY (seq,created_at);
+ALTER TABLE pos
+ADD PRIMARY KEY (pos,seq);
 
 
 
 CREATE TABLE user
 (
-	seq                  INTEGER NOT NULL,
-	height               INTEGER NOT NULL,
-	weight               INTEGER NOT NULL
-);
+	seq                  INTEGER NOT NULL AUTO_INCREMENT,
+	name                 VARCHAR(20) NOT NULL,
+	pos                  INTEGER NOT NULL
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
 
@@ -167,41 +71,11 @@ ADD PRIMARY KEY (seq);
 
 
 ALTER TABLE center
-ADD FOREIGN KEY R_5 (seq, created_at) REFERENCES dataset (seq, created_at);
+ADD FOREIGN KEY R_11 (pos, seq) REFERENCES pos (pos, seq);
 
 
 
-ALTER TABLE dataset
-ADD FOREIGN KEY R_3 (seq) REFERENCES user (seq);
-
-
-
-ALTER TABLE left_1
-ADD FOREIGN KEY R_4 (seq, created_at) REFERENCES dataset (seq, created_at);
-
-
-
-ALTER TABLE left_2
-ADD FOREIGN KEY R_2 (seq, created_at) REFERENCES dataset (seq, created_at);
-
-
-
-ALTER TABLE left_3
-ADD FOREIGN KEY R_1 (seq, created_at) REFERENCES dataset (seq, created_at);
-
-
-
-ALTER TABLE right_1
-ADD FOREIGN KEY R_6 (seq, created_at) REFERENCES dataset (seq, created_at);
-
-
-
-ALTER TABLE right_2
-ADD FOREIGN KEY R_7 (seq, created_at) REFERENCES dataset (seq, created_at);
-
-
-
-ALTER TABLE right_3
-ADD FOREIGN KEY R_8 (seq, created_at) REFERENCES dataset (seq, created_at);
+ALTER TABLE pos
+ADD FOREIGN KEY R_10 (seq) REFERENCES user (seq);
 
 
