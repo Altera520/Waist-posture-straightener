@@ -20,8 +20,10 @@ module.exports = function(sequelize, DataTypes) {
     tableName: 'pos'
   });
 
-  center.belongsTo(models.user, {
-    as: 'seq',
-    foreignKey: 'seq'
-  })
+  pos.associate = (models) =>{
+    pos.belongsTo(models.user, {
+      as: 'seq',
+      foreignKey: 'seq'
+    })
+  }
 };
