@@ -17,8 +17,9 @@
       console.log(dataset)
       $.ajax({
         url: '/start',
-        type: 'post',
+        method: 'post',
         dataType: 'json',
+	data: JSON.stringify(dataset),
         contentType: 'application/json',
         success: function (data) {
           $('#output').html = "data receive start"
@@ -29,7 +30,7 @@
     function end() {
       $.ajax({
         url: '/end',
-        type: 'post',
+        method: 'post',
         dataType: 'json',
         contentType: 'application/json',
         success: function (data) {

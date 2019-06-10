@@ -127,26 +127,26 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     created: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.DATE,
       allowNull: false,
       primaryKey: true
     },
-    pos: {
+    position: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true,
       references: {
         model: 'pos',
-        key: 'pos'
+        key: 'position'
       }
     },
-    seq: {
-      type: DataTypes.INTEGER(11),
+    name: {
+      type: DataTypes.STRING(20),
       allowNull: false,
       primaryKey: true,
       references: {
         model: 'pos',
-        key: 'seq'
+        key: 'name'
       }
     }
   }, {
@@ -154,14 +154,14 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   center.associate = (models) =>{
-    center.belongsTo(models.pos, {
-      as: 'pos',
-      foreignKey: 'pos'
-    })
+ //   center.belongsTo(models.pos, {
+//      as: 'pos',
+//      foreignKey: 'position'
+//    })
 
     center.belongsTo(models.pos, {
-      as: 'seq',
-      foreignKey: 'seq'
+      as: 'pos',
+      foreignKey: ['name','position']
     })
   }
 

@@ -10,6 +10,10 @@ var cors = require('cors');
 
 var app = express();
 
+global.serialOn = false;
+global.position = null;
+global.name= null;
+
 app.use(cors({
   'allowedHeaders': ['sessionId', 'Content-Type', 'Authorization'],
   'exposedHeaders': ['sessionId'],

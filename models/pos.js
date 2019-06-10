@@ -2,18 +2,18 @@
 
 module.exports = function(sequelize, DataTypes) {
   var pos = sequelize.define('pos', {
-    pos: {
+    position: {
       type: DataTypes.INTEGER(11),
       allowNull: false,
       primaryKey: true
     },
-    seq: {
-      type: DataTypes.INTEGER(11),
+    name: {
+      type: DataTypes.STRING(20),
       allowNull: false,
       primaryKey: true,
       references: {
         model: 'user',
-        key: 'seq'
+        key: 'name'
       }
     }
   }, {
@@ -22,8 +22,9 @@ module.exports = function(sequelize, DataTypes) {
 
   pos.associate = (models) =>{
     pos.belongsTo(models.user, {
-      as: 'seq',
-      foreignKey: 'seq'
+      as: 'user',
+      foreignKey: 'name'
     })
   }
+  return pos;
 };

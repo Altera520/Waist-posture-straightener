@@ -31,51 +31,42 @@ CREATE TABLE center
 	field_29             INTEGER NULL,
 	field_30             INTEGER NULL,
 	field_31             INTEGER NULL,
-	created              DATE NOT NULL,
-	pos                  INTEGER NOT NULL,
-	seq                  INTEGER NOT NULL
+	created              DATETIME NOT NULL,
+	position                  INTEGER NOT NULL,
+	name                  VARCHAR(20) NOT NULL
 );
 
 
 
 ALTER TABLE center
-ADD PRIMARY KEY (created,pos,seq);
+ADD PRIMARY KEY (created,position,name);
 
 
 
 CREATE TABLE pos
 (
-	pos                  INTEGER NOT NULL,
-	seq                  INTEGER NOT NULL
+	position                  INTEGER NOT NULL,
+	name                 VARCHAR(20) NOT NULL
+);
+
+
+ALTER TABLE pos
+ADD PRIMARY KEY (position,name);
+
+CREATE TABLE user
+(
+	name                 VARCHAR(20) NOT NULL,
+	PRIMARY KEY (name)
 );
 
 
 
-ALTER TABLE pos
-ADD PRIMARY KEY (pos,seq);
-
-
-
-CREATE TABLE user
-(
-	seq                  INTEGER NOT NULL AUTO_INCREMENT,
-	name                 VARCHAR(20) NOT NULL,
-	pos                  INTEGER NOT NULL
-)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
-
-
-ALTER TABLE user
-ADD PRIMARY KEY (seq);
-
-
-
 ALTER TABLE center
-ADD FOREIGN KEY R_11 (pos, seq) REFERENCES pos (pos, seq);
+ADD FOREIGN KEY R_11 (position, name) REFERENCES pos (position, name);
 
 
 
 ALTER TABLE pos
-ADD FOREIGN KEY R_10 (seq) REFERENCES user (seq);
+ADD FOREIGN KEY R_10 (name) REFERENCES user (name);
 
 

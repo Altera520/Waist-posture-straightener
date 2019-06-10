@@ -18,6 +18,7 @@ services:
     image: jsurf/rpi-mariadb
     restart: always
     container_name: maria
+    network_mode: host
 
     volumes:
       - ./docker/data:/var/lib/maria/data

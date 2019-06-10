@@ -9,32 +9,58 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/start', function(req, res, next) {
-  
+console.log(req.body.name)  
   models.user.findAll({
     where: {
-      name: req.params.name,
+      name: req.body.name,
     }
   }).then(user=>{
-    if(!user){
-      models.user.create({ name: req.params.name});
-      models.user.findAll({
-        where: {
-          name: req.params.name,
-        }
-      }).then(newUser => {
-        models.pos.create({ pos: req.params.pos, seq: newUser.seq});  
-      })
+    if(user.length==0){
+      models.user.create({ name: req.body.name});
+	    
+//      models.db.sequelize.query('INSERT INTO user (seq, name) VALUES (NEXTVAL(s), :name)',{replacements:{name:req.body.name}, type: models.db.sequelize.QueryTypes.INSERT})
+	    //
+      models.pos.create({ position: req.body.pos, name: req.body.name}).then(()=>{
+         //serialServices.open(req.body.pos, req.body.name);
+	 position = req.body.pos;
+	 name = req.body.name;
+	 serialOn = true;
+      });  
+      
     }
     else{
-      models.pos.create({ pos: req.params.pos, seq: user.seq});
+	    console.log('step2'+user.name)
+
+      models.center.destroy({
+	  where: {
+	     name: req.body.name,
+
+             position: req.body.pos
+	  }
+      }).then(()=>{
+      models.pos.destroy({
+	  where: {
+	     name: req.body.name,
+	     position: req.body.pos
+	  }
+      })}).then(()=>{
+
+      models.pos.create({ position: req.body.pos, name: user[0].name}).then(()=>{
+//         serialServices.open(req.body.pos, req.body.name);
+position=req.body.pos;
+name=user[0].name;
+console.log(name);
+	 serialOn = true;
+      });
+      });
     } 
   })
-  serialServices.open(req.params.pos);
   res.json({status: true})
 });
 
 router.post('/end', function(req, res, next) {
-  serialServices.close();
+//  serialServices.close();
+serialOn = false;
   res.json({status: true})
 });
 
